@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "name": "NaviTab-侧边栏树状Tab管理",
+  "version": "1.1.0",
+  "action": { "default_popup": "index.html" },
+  "content_scripts": [
+    {
+      "js": ["src/content/index.tsx"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": {
+    "service_worker": "src/background"
+  },
+  "permissions": ["tabs", "activeTab", "storage"]
+}
