@@ -1,12 +1,17 @@
 import { css } from "@emotion/react";
 import { useEffect, useRef, useState } from "react";
 
-const videos = document.getElementsByTagName("video");
-const video = videos?.[0];
+export function clickElem(el: HTMLElement): void {
+  const evObj = document.createEvent("Events");
+  evObj.initEvent("click", true, false);
+  el.dispatchEvent(evObj);
+}
 
 export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<string>(null);
+  const [src, setSrc] = useState<string>();
 
   // useEffect(() => {
   //   document.addEventListener("keydown", (e) => {
@@ -39,7 +44,26 @@ export default function App() {
   // }, []);
 
   useEffect(() => {
-    console.log("video", video, document.fullscreenEnabled);
+    // 监听键盘事件
+    document.addEventListener("keydown", (e) => {
+      console.log("e", e);
+    });
+
+    const videos = document.getElementsByTagName("video");
+    const video = videos?.[0];
+
+    const imgs = document.getElementsByTagName("img");
+    const img = imgs?.[0];
+
+    console.log("img", img);
+
+    img.onload = () => {
+      console.log("@@@img load");
+    };
+
+    // videoRef.current = video.src;
+
+    console.log("@@@video÷", video.onplaying, video.src);
 
     if (video) {
       video.defaultPlaybackRate = 2;
@@ -49,7 +73,7 @@ export default function App() {
       // video.requestFullscreen();
       // video.click();
     }
-  }, [video]);
+  }, []);
   // const [isPlaying, setIsPlaying] = useState(false);
   // useEffect(() => {
   //   const videos = document.getElementsByTagName("video");
@@ -73,13 +97,13 @@ export default function App() {
         font-size: 100px;
         z-index: 999;
       `}
-      onClick={() => {
-        console.log("123123123");
-        video.requestFullscreen();
-      }}
+      // onClick={() => {
+      //   console.log("123123123");
+      //   video.requestFullscreen();
+      // }}
       ref={ref}
     >
-      App
+      aa
     </div>
   );
 }
