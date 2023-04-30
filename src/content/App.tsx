@@ -1,91 +1,63 @@
 import { css } from "@emotion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { isEmpty } from "lodash";
 
-export function clickElem(el: HTMLElement): void {
-  const evObj = document.createEvent("Events");
-  evObj.initEvent("click", true, false);
-  el.dispatchEvent(evObj);
-}
+const YOUTUBE_AD_BUTTON_CLASSNAME = [
+  "videoAdUiSkipButton", // Old close ad button
+  "ytp-ad-skip-button ytp-button", // New close ad button
+];
+
+// const YOUTUBE_AD_BUTTON_ELEMENTS = YOUTUBE_AD_BUTTON_CLASSNAME.map(
+//   (className) =>
+//     isEmpty(document.getElementsByClassName(className))
+//       ? null
+//       : document.getElementsByClassName(className)
+// ).filter((item) => item);
+
+const getElementsByClassNames = (classNames: string[]) =>
+  classNames
+    .map((className) =>
+      isEmpty(document.getElementsByClassName(className))
+        ? null
+        : document.getElementsByClassName(className)
+    )
+    .filter((item) => item);
 
 export default function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<string>(null);
-  const [src, setSrc] = useState<string>();
-
-  // useEffect(() => {
-  //   document.addEventListener("keydown", (e) => {
-  //     console.log("e", e);
-  //   });
-
-  //   setTimeout(() => {
-  //     // if (ref?.current) {
-  //     //   ref.current.click();
-  //     // }
-
-  //     // 模拟按下键盘按钮
-  //     const pressKeyEvent = new KeyboardEvent("keydown", {
-  //       key: "f",
-  //       code: "KeyF",
-  //       which: 70,
-  //       keyCode: 70,
-  //     });
-  //     document.dispatchEvent(pressKeyEvent);
-
-  //     // 模拟释放键盘按钮
-  //     const releaseKeyEvent = new KeyboardEvent("keyup", {
-  //       key: "f",
-  //       code: "KeyF",
-  //       which: 70,
-  //       keyCode: 70,
-  //     });
-  //     document.dispatchEvent(releaseKeyEvent);
-  //   }, 10000);
-  // }, []);
-
+  // 视频二倍速
   useEffect(() => {
-    // 监听键盘事件
-    document.addEventListener("keydown", (e) => {
-      console.log("e", e);
-    });
-
     const videos = document.getElementsByTagName("video");
     const video = videos?.[0];
-
-    const imgs = document.getElementsByTagName("img");
-    const img = imgs?.[0];
-
-    console.log("img", img);
-
-    img.onload = () => {
-      console.log("@@@img load");
-    };
-
-    // videoRef.current = video.src;
-
-    console.log("@@@video÷", video.onplaying, video.src);
 
     if (video) {
       video.defaultPlaybackRate = 2;
       video.playbackRate = 2;
-
-      // todo 全屏操作只能由用户触发？
-      // video.requestFullscreen();
-      // video.click();
     }
   }, []);
-  // const [isPlaying, setIsPlaying] = useState(false);
-  // useEffect(() => {
-  //   const videos = document.getElementsByTagName("video");
-  //   const video = videos?.[0];
-  //   if (video) {
-  //     console.log("video", video.onplaying);
 
-  //     // video.pause();
-  //     video.defaultPlaybackRate = 2;
-  //     video.playbackRate = 2;
-  //   }
-  // }, [isPlaying]);
+  useEffect(() => {
+    let youtubeADSkipButtons;
+    const timer = setInterval(() => {
+      youtubeADSkipButtons = getElementsByClassNames(
+        YOUTUBE_AD_BUTTON_CLASSNAME
+      );
+      console.log("youtubeADSkipButtons", youtubeADSkipButtons);
+      if (isEmpty(youtubeADSkipButtons)) {
+        return;
+      }
+      youtubeADSkipButtons.forEach((youtubeADSkipButton) => {
+        console.log("item", Date.now(), youtubeADSkipButton);
+        if (youtubeADSkipButton?.[0]) {
+          (youtubeADSkipButton[0] as HTMLElement).click();
+          console.log("skp");
+        }
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <div
@@ -97,13 +69,8 @@ export default function App() {
         font-size: 100px;
         z-index: 999;
       `}
-      // onClick={() => {
-      //   console.log("123123123");
-      //   video.requestFullscreen();
-      // }}
-      ref={ref}
     >
-      aa
+      aaasd
     </div>
   );
 }
