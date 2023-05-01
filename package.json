@@ -1,7 +1,12 @@
 {
   "name": "youtube-ads-skipper",
+  "short_name": "youtube ads skipper",
+  "description": "youtube-ads-skipper is an extension to auto click the skip button when you are watching youtube videos.",
+  "manifest_version": 3,
+  "author": "cwjjjjj",
+  "homepage_url": "https://github.com/cwjjjjj/youtube-ads-skipper",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
