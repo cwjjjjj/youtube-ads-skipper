@@ -7,7 +7,7 @@
     "128": "logo.png"
   },
   "name": "youtube-ads-skipper",
-  "version": "1.1.0",
+  "version": "0.0.1",
   "action": { "default_popup": "index.html" },
   "content_scripts": [
     {
