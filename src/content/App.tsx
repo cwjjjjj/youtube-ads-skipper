@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { isEmpty } from "lodash";
+import { getCurrentTab } from "../utils/getCurrentTab";
 
 const YOUTUBE_AD_BUTTON_CLASSNAME = [
   "videoAdUiSkipButton",
@@ -15,15 +16,21 @@ const getElementsByClassNames = (classNames: string[]) =>
     )
     .filter((item) => item);
 
+const isBilibili = (url?: string) => url?.includes("www.bilibili.com");
+
 export default function App() {
-  // 视频二倍速
+  // bilibili playbackRate 2
   useEffect(() => {
-    const videos = document.getElementsByTagName("video");
-    const video = videos?.[0];
-    if (video) {
-      video.defaultPlaybackRate = 2;
-      video.playbackRate = 2;
-    }
+    getCurrentTab().then((tab) => {
+      if (isBilibili(tab.url)) {
+        const videos = document.getElementsByTagName("video");
+        const video = videos?.[0];
+        if (video) {
+          video.defaultPlaybackRate = 2;
+          video.playbackRate = 2;
+        }
+      }
+    });
   }, []);
 
   useEffect(() => {
