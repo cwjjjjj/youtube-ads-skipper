@@ -1,16 +1,5 @@
 function App() {
-  return (
-    <div
-      className="App"
-      style={{
-        fontSize: "20px",
-        fontWeight: "500",
-        whiteSpace: "nowrap",
-      }}
-    >
-      template
-    </div>
-  );
+  return <div>youtube ads skipper</div>;
 }
 
 export default App;
