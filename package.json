@@ -6,14 +6,16 @@
   "author": "cwjjjjj",
   "homepage_url": "https://github.com/cwjjjjj/youtube-ads-skipper",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "cz": "git add . && git cz",
-    "czp": "yarn cz && git push -u origin HEAD"
+    "czp": "yarn cz && git push -u origin HEAD",
+    "purge": "rm -rf dist",
+    "release": "./bin/release.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
