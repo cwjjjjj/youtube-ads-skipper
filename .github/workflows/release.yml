@@ -1,0 +1,64 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Yarn setup
+        uses: DerYeger/yarn-setup-action@main
+        with:
+          node-version: 18
+      - name: Build
+        run: yarn build
+
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r dist-${{ github.ref_name }}.zip dist
+
+      # - name: Rename release file
+      #   run: mv dist.zip dist-${{ github.ref }}.zip
+
+      # - name: Create release
+      #   id: create_release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     files: dist.zip
+
+      - name: Purge
+        run: yarn purge
+
+      - name: Build beta
+        run: yarn build:beta
+
+      - name: Zip dist folder for beta
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r dist-${{ github.ref_name }}-beta.zip dist
+
+      # - name: Rename release file for beta
+      #   run: mv dist-beta.zip dist-${{ github.ref }}-beta.zip
+
+      # - name: Create release for beta
+      #   id: create_beta_release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: ${{ github.ref }}-beta
+      #     files: dist-${{ github.ref }}-beta.zip
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          files: |
+            dist-${{ github.ref_name }}.zip
+            dist-${{ github.ref_name }}-beta.zip
