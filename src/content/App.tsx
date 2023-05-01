@@ -16,6 +16,16 @@ const getElementsByClassNames = (classNames: string[]) =>
     .filter((item) => item);
 
 export default function App() {
+  // 视频二倍速
+  useEffect(() => {
+    const videos = document.getElementsByTagName("video");
+    const video = videos?.[0];
+    if (video) {
+      video.defaultPlaybackRate = 2;
+      video.playbackRate = 2;
+    }
+  }, []);
+
   useEffect(() => {
     // skip youtube ads
     let youtubeADSkipButtons;

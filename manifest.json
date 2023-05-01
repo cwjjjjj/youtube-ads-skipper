@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "js": ["src/content/index.tsx"],
-      "matches": ["*://*.youtube.com/*"],
+      "matches": ["*://*.youtube.com/*", "*://*.bilibili.com/*"],
       "run_at": "document_end"
     }
   ],
