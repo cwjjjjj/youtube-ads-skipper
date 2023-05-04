@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Yarn setup
-        uses: DerYeger/yarn-setup-action@main
+        # - name: Yarn setup
+        # uses: DerYeger/yarn-setup-action@main
         with:
           node-version: 18
       - name: Build
