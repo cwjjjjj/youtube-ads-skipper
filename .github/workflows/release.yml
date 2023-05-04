@@ -36,8 +36,8 @@ jobs:
       - name: Purge
         run: yarn purge
 
-      - name: Build beta
-        run: yarn build:beta
+      - name: Build
+        run: yarn build
 
       - name: Zip dist folder for beta
         uses: montudor/action-zip@v1
