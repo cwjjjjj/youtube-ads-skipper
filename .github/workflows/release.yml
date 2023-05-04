@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Yarn setup
-        uses: DerYeger/yarn-setup-action@main
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
         with:
           node-version: 18
       - name: Build
@@ -36,8 +38,8 @@ jobs:
       - name: Purge
         run: yarn purge
 
-      - name: Build beta
-        run: yarn build:beta
+      - name: Build
+        run: yarn build
 
       - name: Zip dist folder for beta
         uses: montudor/action-zip@v1
