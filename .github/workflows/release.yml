@@ -45,16 +45,16 @@ jobs:
       #     tag_name: ${{ github.ref }}
       #     files: dist.zip
 
-      - name: Purge
-        run: yarn purge
+      # - name: Purge
+      #   run: yarn purge
 
-      - name: Build
-        run: yarn build
+      # - name: Build
+      #   run: yarn build
 
-      - name: Zip dist folder for beta
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r dist-${{ github.ref_name }}-beta.zip dist
+      # - name: Zip dist folder for beta
+      #   uses: montudor/action-zip@v1
+      #   with:
+      #     args: zip -qq -r dist-${{ github.ref_name }}-beta.zip dist
 
       # - name: Rename release file for beta
       #   run: mv dist-beta.zip dist-${{ github.ref }}-beta.zip
@@ -66,11 +66,11 @@ jobs:
       #     tag_name: ${{ github.ref }}-beta
       #     files: dist-${{ github.ref }}-beta.zip
 
-      - name: Create release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref }}
-          files: |
-            dist-${{ github.ref_name }}.zip
-            dist-${{ github.ref_name }}-beta.zip
+      # - name: Create release
+      #   id: create_release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     files: |
+      #       dist-${{ github.ref_name }}.zip
+      #       dist-${{ github.ref_name }}-beta.zip
