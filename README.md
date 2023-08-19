@@ -15,7 +15,7 @@
 5. 选择插件代码所在的文件夹即可安装插件
 
 ## 使用
-
+已经上架 chrome 商店 https://chrome.google.com/webstore/detail/youtube-ads-skipper/lpjendnnokagfjbkfiffbhoahjbngckh
 在观看 YouTube 视频时，插件会自动跳过视频广告。
 
 ## 贡献
